@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Planowany schemat API -- PW</title>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        
+    </head>
+    <body class="vscode-light">
+        <h3 id="planowany-schemat-api----pw">Planowany schemat API -- PW</h3>
+<pre><code>Przykładowy adres (niezmienny) np. http://IP_servera/api/v1/
+ 
+[GET /products/pizza]
+[GET /products/pizza/[id]]
+[GET /products/sets]
+[GET /products/news]
+
+[GET | JSON /basket/id=[id&amp;id...]]
+</code></pre>
+<h2 id="request--response-examples-whitehouse">Request &amp; Response Examples <a href="https://github.com/WhiteHouse/api-standards">WhiteHouse</a></h2>
+<h3 id="api-resources">API Resources</h3>
+<ul>
+<li><a href="#get-magazines">GET /magazines</a></li>
+<li><a href="#get-magazinesid">GET /magazines/[id]</a></li>
+<li><a href="#post-magazinesidarticles">POST /magazines/[id]/articles</a></li>
+</ul>
+<h3 id="get-magazines">GET /magazines</h3>
+<p>Example: <a href="http://example.gov/api/v1/magazines.json">http://example.gov/api/v1/magazines.json</a></p>
+<p>Response body:</p>
+<pre><code>{
+    &quot;metadata&quot;: {
+        &quot;resultset&quot;: {
+            &quot;count&quot;: 123,
+            &quot;offset&quot;: 0,
+            &quot;limit&quot;: 10
+        }
+    },
+    &quot;results&quot;: [
+        {
+            &quot;id&quot;: &quot;1234&quot;,
+            &quot;type&quot;: &quot;magazine&quot;,
+            &quot;title&quot;: &quot;Public Water Systems&quot;,
+            &quot;tags&quot;: [
+                {&quot;id&quot;: &quot;125&quot;, &quot;name&quot;: &quot;Environment&quot;},
+                {&quot;id&quot;: &quot;834&quot;, &quot;name&quot;: &quot;Water Quality&quot;}
+            ],
+            &quot;created&quot;: &quot;1231621302&quot;
+        },
+        {
+            &quot;id&quot;: 2351,
+            &quot;type&quot;: &quot;magazine&quot;,
+            &quot;title&quot;: &quot;Public Schools&quot;,
+            &quot;tags&quot;: [
+                {&quot;id&quot;: &quot;125&quot;, &quot;name&quot;: &quot;Elementary&quot;},
+                {&quot;id&quot;: &quot;834&quot;, &quot;name&quot;: &quot;Charter Schools&quot;}
+            ],
+            &quot;created&quot;: &quot;126251302&quot;
+        }
+        {
+            &quot;id&quot;: 2351,
+            &quot;type&quot;: &quot;magazine&quot;,
+            &quot;title&quot;: &quot;Public Schools&quot;,
+            &quot;tags&quot;: [
+                {&quot;id&quot;: &quot;125&quot;, &quot;name&quot;: &quot;Pre-school&quot;},
+            ],
+            &quot;created&quot;: &quot;126251302&quot;
+        }
+    ]
+}
+</code></pre>
+<h3 id="get-magazinesid">GET /magazines/[id]</h3>
+<p>Example: <a href="http://example.gov/api/v1/magazines/%5Bid%5D.json">http://example.gov/api/v1/magazines/[id].json</a></p>
+<p>Response body:</p>
+<pre><code>{
+    &quot;id&quot;: &quot;1234&quot;,
+    &quot;type&quot;: &quot;magazine&quot;,
+    &quot;title&quot;: &quot;Public Water Systems&quot;,
+    &quot;tags&quot;: [
+        {&quot;id&quot;: &quot;125&quot;, &quot;name&quot;: &quot;Environment&quot;},
+        {&quot;id&quot;: &quot;834&quot;, &quot;name&quot;: &quot;Water Quality&quot;}
+    ],
+    &quot;created&quot;: &quot;1231621302&quot;
+}
+</code></pre>
+<h3 id="post-magazinesidarticles">POST /magazines/[id]/articles</h3>
+<p>Example: Create – POST  <a href="http://example.gov/api/v1/magazines/%5Bid%5D/articles">http://example.gov/api/v1/magazines/[id]/articles</a></p>
+<p>Request body:</p>
+<pre><code>[
+    {
+        &quot;title&quot;: &quot;Raising Revenue&quot;,
+        &quot;author_first_name&quot;: &quot;Jane&quot;,
+        &quot;author_last_name&quot;: &quot;Smith&quot;,
+        &quot;author_email&quot;: &quot;jane.smith@example.gov&quot;,
+        &quot;year&quot;: &quot;2012&quot;,
+        &quot;month&quot;: &quot;August&quot;,
+        &quot;day&quot;: &quot;18&quot;,
+        &quot;text&quot;: &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ante ut augue scelerisque ornare. Aliquam tempus rhoncus quam vel luctus. Sed scelerisque fermentum fringilla. Suspendisse tincidunt nisl a metus feugiat vitae vestibulum enim vulputate. Quisque vehicula dictum elit, vitae cursus libero auctor sed. Vestibulum fermentum elementum nunc. Proin aliquam erat in turpis vehicula sit amet tristique lorem blandit. Nam augue est, bibendum et ultrices non, interdum in est. Quisque gravida orci lobortis... &quot;
+    }
+]
+</code></pre>
+<h2 id="mock-responses">Mock Responses</h2>
+<p>It is suggested that each resource accept a 'mock' parameter on the testing server. Passing this parameter should return a mock data response (bypassing the backend).</p>
+<p>Implementing this feature early in development ensures that the API will exhibit consistent behavior, supporting a test driven development methodology.</p>
+<p>Note: If the mock parameter is included in a request to the production environment, an error should be raised.</p>
+
+    </body>
+    </html>
